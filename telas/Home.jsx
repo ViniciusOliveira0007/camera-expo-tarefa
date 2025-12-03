@@ -1,7 +1,7 @@
 import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, Alert, ScrollView } from 'react-native';
 
 export default function Home({ navigation }) {
   const [imageUri, setImageUri] = useState(null);
@@ -42,13 +42,11 @@ export default function Home({ navigation }) {
   }
 
   function irParaPerfil() {
-    
     if (!nome || !email) {
       Alert.alert('Atenção', 'Por favor, preencha nome e email!');
       return;
     }
 
-    
     navigation.navigate('Perfil', {
       nome: nome,
       email: email,
@@ -57,47 +55,53 @@ export default function Home({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.titulo}>Bem vindo ao meu site de Stories</Text>
-      <Text style={styles.subtitulo}>Faça as suas publicações como achar melhor!</Text>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <View style={styles.container}>
+        <Text style={styles.titulo}>Bem vindo ao meu site de Stories</Text>
+        <Text style={styles.subtitulo}>Faça as suas publicações como achar melhor!</Text>
 
-      <Text style={styles.label}>Nome:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder='Escreva seu nome'
-        value={nome}
-        onChangeText={setNome}
-      />
+        <Text style={styles.label}>Nome:</Text>
+        <TextInput
+          style={styles.input}
+          placeholder='Escreva seu nome'
+          value={nome}
+          onChangeText={setNome}
+        />
 
-      <Text style={styles.label}>Email:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder='Escreva seu email'
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-      />
+        <Text style={styles.label}>Email:</Text>
+        <TextInput
+          style={styles.input}
+          placeholder='Escreva seu email'
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+        />
 
-      <TouchableOpacity style={styles.btn} onPress={abrirCamera}>
-        <Text style={styles.txtbtn}>Escolher imagem</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.btn} onPress={abrirCamera}>
+          <Text style={styles.txtbtn}>Escolher imagem</Text>
+        </TouchableOpacity>
 
-      <Text style={styles.status}>{status}</Text>
+        <Text style={styles.status}>{status}</Text>
 
-      {imageUri ? (
-        <Image source={{ uri: imageUri }} resizeMode='cover' style={styles.imagem} />
-      ) : (
-        <Text style={styles.semFoto}>Nenhuma foto capturada</Text>
-      )}
+        {imageUri ? (
+          <Image source={{ uri: imageUri }} resizeMode='cover' style={styles.imagem} />
+        ) : (
+          <Text style={styles.semFoto}>Nenhuma foto capturada</Text>
+        )}
 
-      <TouchableOpacity style={styles.btn} onPress={irParaPerfil}>
-        <Text style={styles.txtbtn}>Ver perfil</Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity style={styles.btn} onPress={irParaPerfil}>
+          <Text style={styles.txtbtn}>Ver perfil</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
   imagem: {
     width: 300,
     height: 300,
@@ -105,11 +109,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   container: {
-    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
     padding: 20,
+    paddingTop: 40,
+    paddingBottom: 40,
   },
   titulo: {
     fontSize: 24,
