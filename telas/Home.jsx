@@ -42,13 +42,13 @@ export default function Home({ navigation }) {
   }
 
   function irParaPerfil() {
-    // Validação antes de navegar
+    
     if (!nome || !email) {
       Alert.alert('Atenção', 'Por favor, preencha nome e email!');
       return;
     }
 
-    // Navegar para a tela de perfil enviando os dados
+    
     navigation.navigate('Perfil', {
       nome: nome,
       email: email,

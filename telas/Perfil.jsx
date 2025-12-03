@@ -7,11 +7,15 @@ export default function Perfil({ navigation }) {
 
   return (
     <View style={styles.container}>
+
+      
       <Text style={styles.titulo}>Meu Perfil</Text>
 
       {foto ? (
+
         <Image source={{ uri: foto }} resizeMode='cover' style={styles.foto} />
       ) : (
+
         <View style={styles.semFoto}>
           <Text style={styles.semFotoTexto}>Sem foto</Text>
         </View>
@@ -21,9 +25,13 @@ export default function Perfil({ navigation }) {
         <Text style={styles.label}>Nome:</Text>
         <Text style={styles.valor}>{nome}</Text>
 
+
+
         <Text style={styles.label}>Email:</Text>
         <Text style={styles.valor}>{email}</Text>
       </View>
+
+
 
       <TouchableOpacity 
         style={styles.btnVoltar} 
